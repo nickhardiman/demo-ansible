@@ -3,43 +3,57 @@
 
 == run a playbook from the CLI
 
-# clean up from previous runs 
+clean up from previous runs 
 ```
 rm *.json
 rm *.log
 podman rmi hub1.lab.example.com/my_new_ee:latest
 ```
 
-# vim for ansible
-# https://hardiman.consulting/ansible/2.11/workstation/vim-use.html
+vim for ansible
+https://hardiman.consulting/ansible/2.11/workstation/vim-use.html
+```
 vim inventory.yml
 echo 'autocmd FileType yaml setlocal sw=2 ts=2 et ai cuc' >> ~/.vimrc
+```
 
-# use ansible-playbook to add a web server 
+use ansible-playbook to add a web server 
+```
 ansible-playbook  main.yml 
 curl builder2.lab.example.com
+```
 
-# remove the web server
+remove the web server
+```
 ansible-playbook remove.yml 
 curl builder2.lab.example.com
+```
 
-# use ansible-navigator to add a web server 
+use ansible-navigator to add a web server 
+```
 podman images
 ansible-navigator run main.yml 
-# problem 1 - can't pull the container
+```
+*problem 1* - can't pull the container
 
-# try again
+try again
+```
 podman login -u admin hub1.lab.example.com
 ansible-navigator run main.yml 
-# problem 2 - no private key in the container
+```
+*problem 2* - no private key in the container
+```
 podman images
+```
 
 # try again
+```
 eval `ssh-agent`
 ssh-add /home/nick/.ssh/ansible-key.priv
 ansible-navigator run main.yml 
+```
 
-# success!
+success!
 
 == run the same playbook from Controller 
 
@@ -47,7 +61,8 @@ See web UI
 
 == add an organization using curl 
 
-# add an organization
+add an organization
+```
 curl \
   --verbose \
   --silent \
@@ -57,8 +72,10 @@ curl \
   --data    "@org-ops.json" \
   https://control1.lab.example.com/api/v2/organizations/ \
 > ./reply-post.json
+```
 
-# remove the organization
+remove the organization
+```
 curl \
   --verbose \
   --silent \
@@ -66,4 +83,5 @@ curl \
   --user    "admin:redhat" \
   https://control1.lab.example.com/api/v2/organizations/ops/ \
 > ./reply-delete.json
+```
 
