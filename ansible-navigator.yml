@@ -1,0 +1,12 @@
+---
+ansible-navigator:
+  ansible:
+    config:
+      path: ./ansible.cfg
+  execution-environment:
+    image: hub1.lab.example.com/my_new_ee:latest
+    #image: ee-supported-rhel8:latest
+    pull:
+      policy: missing
+  mode: stdout
+

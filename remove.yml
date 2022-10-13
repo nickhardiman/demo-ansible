@@ -1,0 +1,21 @@
+---
+- name: remove apache
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Stop the httpd service if needed
+      ansible.builtin.service:
+        name: httpd
+        state: stopped
+
+    - name: Remove the index.html file
+      ansible.builtin.file:
+        name: /var/www/html/index.html
+        state: absent
+
+    - name: Remove the httpd package
+      ansible.builtin.yum:
+        name: httpd
+        state: absent
+

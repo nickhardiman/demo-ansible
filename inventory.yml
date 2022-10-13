@@ -1,0 +1,7 @@
+---
+all:
+  children:
+    web:
+      hosts:
+        builder2.lab.example.com: {}
+
