@@ -46,7 +46,7 @@ ansible-navigator run main.yml
 podman images
 ```
 
-# try again
+try again
 ```
 eval `ssh-agent`
 ssh-add /home/nick/.ssh/ansible-key.priv
@@ -54,6 +54,13 @@ ansible-navigator run main.yml
 ```
 
 success!
+
+log and JSON artifacts 
+```
+tail ansible-navigator.log 
+head main-artifact-2022-10-13T17\:13\:56.877055+00\:00.json
+```
+
 
 == run the same playbook from Controller 
 
