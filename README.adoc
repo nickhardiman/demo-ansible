@@ -1,7 +1,14 @@
+
+= demo 
+
+== run a playbook from the CLI
+
 # clean up from previous runs 
+```
 rm *.json
 rm *.log
 podman rmi hub1.lab.example.com/my_new_ee:latest
+```
 
 # vim for ansible
 # https://hardiman.consulting/ansible/2.11/workstation/vim-use.html
@@ -33,4 +40,30 @@ ssh-add /home/nick/.ssh/ansible-key.priv
 ansible-navigator run main.yml 
 
 # success!
+
+== run the same playbook from Controller 
+
+See web UI
+
+== add an organization using curl 
+
+# add an organization
+curl \
+  --verbose \
+  --silent \
+  --request POST \
+  --user    "admin:redhat" \
+  --header  "Content-Type: application/json"  \
+  --data    "@org-ops.json" \
+  https://control1.lab.example.com/api/v2/organizations/ \
+> ./reply-post.json
+
+# remove the organization
+curl \
+  --verbose \
+  --silent \
+  --request DELETE \
+  --user    "admin:redhat" \
+  https://control1.lab.example.com/api/v2/organizations/ops/ \
+> ./reply-delete.json
 
